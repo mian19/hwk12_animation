@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     
     private func addElements() {
         task1Button = UIButton.makeNew(withLabel: "Task1")
-        task2Button = UIButton.makeNew(withLabel: "Task2")
+        task2Button = UIButton.makeNew(withLabel: "Task3")
         task1Button.addTarget(self, action: #selector(on1Button), for: .touchUpInside)
         task2Button.addTarget(self, action: #selector(on2Button), for: .touchUpInside)
     }
