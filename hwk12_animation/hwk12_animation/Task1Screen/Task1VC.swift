@@ -21,6 +21,7 @@ class Task1VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "CRAZY BALL"
         circle.center = CGPoint(x: view.bounds.midX - circleRadius * 2, y: view.bounds.midY - circleRadius * 3)
     }
     

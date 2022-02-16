@@ -68,11 +68,11 @@
 			children = (
 				675EE17427BCF22D00F7B097 /* AppDelegate.swift */,
 				675EE17627BCF22D00F7B097 /* SceneDelegate.swift */,
-				675EE19327BD326800F7B097 /* Task3Screen */,
+				675EE18D27BD1B9200F7B097 /* UIButton+makeNew.swift */,
 				675EE18A27BD017A00F7B097 /* Task1Screen */,
+				675EE19327BD326800F7B097 /* Task3Screen */,
 				675EE17A27BCF22D00F7B097 /* Main.storyboard */,
 				675EE17827BCF22D00F7B097 /* ViewController.swift */,
-				675EE18D27BD1B9200F7B097 /* UIButton+makeNew.swift */,
 				675EE17D27BCF22F00F7B097 /* Assets.xcassets */,
 				675EE17F27BCF22F00F7B097 /* LaunchScreen.storyboard */,
 				675EE18227BCF22F00F7B097 /* Info.plist */,
