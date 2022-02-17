@@ -9,52 +9,67 @@ import UIKit
 
 class Task3VC: UIViewController {
     
-    private var imageView = UIImageView()
+    private let images = ["pict1", "pict2", "pict3", "pict4", "pict5", "pict6"]
+    private var i = 0
+    private var arrayOfImageViews: [UIImageView] = []
     
-    let images = ["pict1", "pict2", "pict3", "pict4", "pict5", "pict6"]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "LIFECYCLE"
-        
-        workWithImage(imageName: images[0])
-        
-
+        workWithImage(imageName: images[i])
+        view.subviews.first!.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
+        arrayOfImageViews = view.subviews.map{ $0 as! UIImageView}
     }
     
     private func workWithImage(imageName: String) {
         let image = UIImage(named: imageName)
-        imageView.frame.size = (image?.size) ?? CGSize(width: 200, height: 400)
-        print(imageView.frame.size)
-        imageView.image = image
-        imageView.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
-        
-        imageView.isUserInteractionEnabled = true
+        let imageView = UIImageView()
         let toLeftGest = UISwipeGestureRecognizer(target: self, action: #selector(swipeToLeft))
-        toLeftGest.direction = .left
         let toRightGest = UISwipeGestureRecognizer(target: self, action: #selector(swipeToRight))
+        imageView.frame.size = (image?.size) ?? CGSize(width: 200, height: 400)
+        imageView.image = image
+        imageView.isUserInteractionEnabled = true
+        toLeftGest.direction = .left
         toRightGest.direction = .right
         imageView.addGestureRecognizer(toLeftGest)
         imageView.addGestureRecognizer(toRightGest)
-        
-     
-        view.addSubview(imageView)
+        self.view.addSubview(imageView)
+        arrayOfImageViews.append(imageView)
     }
     
     @objc private func swipeToLeft() {
-        print("goToLeft")
-        UIView.animate(withDuration: 1, animations: {
-            imageView.center = CGPoint(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-        })
+        if i < images.count - 1 {
+            i += 1
+            workWithImage(imageName: images[i])
+            arrayOfImageViews.last!.center = CGPoint(x: self.view.frame.maxX + self.arrayOfImageViews.last!.frame.width / 2, y: self.view.bounds.midY)
+            animation(picCurrent:arrayOfImageViews.first!, picNew:  arrayOfImageViews.last! )
+            arrayOfImageViews.removeFirst()
+        }
     }
     
     @objc private func swipeToRight() {
-        print("goToRight")
+        if i > 0 {
+            i -= 1
+            workWithImage(imageName: images[i])
+            arrayOfImageViews.last!.center = CGPoint(x: self.view.frame.minX - self.arrayOfImageViews.last!.frame.width / 2, y: self.view.bounds.midY)
+            animation(picCurrent:arrayOfImageViews.first!, picNew:  arrayOfImageViews.last! )
+            arrayOfImageViews.removeFirst()
+        }
     }
     
-    
-        
-
+    private func animation(picCurrent: UIImageView, picNew: UIImageView) {
+        UIView.animate(withDuration: 0.5, animations: {
+            if (picNew.center.x > picCurrent.center.x) {
+                picCurrent.center = CGPoint(x: self.view.frame.minX - self.arrayOfImageViews.first!.frame.width / 2, y: self.view.bounds.midY)
+            } else {
+                picCurrent.center = CGPoint(x: self.view.frame.maxX + self.arrayOfImageViews.first!.frame.width / 2, y: self.view.bounds.midY)
+            }
+            picNew.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
+        }, completion: {_ in
+            picCurrent.removeFromSuperview()
+        })
     }
+    
+}
     
 
