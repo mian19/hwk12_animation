@@ -9,13 +9,13 @@ import UIKit
 
 class Task1VC: UIViewController {
     
-    private var circle: UIView!
+    private var circle = UIView()
     private let circleRadius: CGFloat = 50
     
     override func loadView() {
         let customView = UIView.init(frame: UIScreen.main.bounds)
         view = customView
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemGray
         addCircle()
     }
     
