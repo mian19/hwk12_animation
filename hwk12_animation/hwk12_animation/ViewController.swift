@@ -9,8 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var task1Button: UIButton!
-    private var task2Button: UIButton!
+    private var task1Button = UIButton()
+    private var task2Button = UIButton()
     
     override func loadView() {
         let customView = UIView(frame: UIScreen.main.bounds)
@@ -53,9 +53,8 @@ class ViewController: UIViewController {
     }
     
     private func transitionTo<T: UIViewController>(vc: T.Type) {
-        let storyboard = UIStoryboard.init(name: "\(vc)", bundle: Bundle.main)
-        let vc = storyboard.instantiateInitialViewController() as! T
-        navigationController?.pushViewController(vc, animated: true)
+        let nextVC = UIViewController.newVC(customVC: vc)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @objc private func on1Button() {
